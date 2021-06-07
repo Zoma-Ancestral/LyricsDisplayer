@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using LyricsDisplayer.Controller;
 
 namespace LyricsDisplayer
 {
@@ -23,6 +24,12 @@ namespace LyricsDisplayer
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private async void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            string? lyrics = await GeniusController.GetLyrics(SearchText.Text);
+            LyricsLabel.Content = (lyrics == null) ? "" : lyrics ;
         }
     }
 }
